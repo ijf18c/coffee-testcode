@@ -2,6 +2,17 @@
 #define TRIG_PIN 12
 #define ECHO_PIN 11
 
+/*
+   This program uses two variables to track events: the current event (event) and a previous event (lastEvent).  
+   The event codes are as follows:
+   
+   0 - No event / ignore
+   1 - Pot placed on the scale
+   2 - Weight decrease from last measurement
+   3 - Pot removed from scale
+*/
+
+
 //Global Variables
 SR04 sensor = SR04(ECHO_PIN,TRIG_PIN);
 const long MAX_DISTANCE = 40;
@@ -22,6 +33,8 @@ void setup() {
 
 void loop() {
     long newDistance = sensor.Distance();
+   
+
     int event = 0;
 
     if(lastEvent == 3) {
